@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="https://bootstrap-4.ru/dist/css/bootstrap.min.css">
+    <link href="/css/signin.css" rel="stylesheet">
+
+</head>
+<body class="text-center">
+
+<div class="container">
+    <div class="row">
+
+        <form class="form-signin" method="post" th:action="@{/reg}">
+            <h1 class="h3 mb-3 font-weight-normal">Регистрация</h1>
+            <label for="inputLogin" class="sr-only">Логин</label>
+            <input name="username" th:field="*{newuser.username}" type="login" id="inputLogin" class="form-control"
+                   placeholder="login" required autofocus minlength="3">
+            <label for="inputEmail" class="sr-only">Логин</label>
+            <input name="email" th:field="*{newuser.email}" type="email" id="inputEmail" class="form-control"
+                   placeholder="email" required minlength="8">
+
+            <label for="inputPassword" class="sr-only">пароль</label>
+            <input th:field="*{newuser.password}" name="password" type="password" id="inputPassword"
+                   class="form-control"
+                   placeholder="Password" required minlength="8">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Регистрация</button>
+            <div class="d-flex justify-content-end">
+                <p><a th:href="@{/login}"><strong>Войти</strong></a></p>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>

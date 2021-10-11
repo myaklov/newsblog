@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование пользователя</title>
+    <link rel="stylesheet" href="https://bootstrap-4.ru/dist/css/bootstrap.min.css">
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row">
+        <div class="header-menu">
+            <header th:insert="blocks/header :: header"></header>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-12">
+
+            <form class="form-addarticle" th:action="@{/users/}" method="post" th:object="${user}">
+                <div class="form-group">
+                    <label for="Username">Username</label>
+                    <input th:field="*{username}" id="Username" name="Username" placeholder="Username" type="text"
+                           class="form-control" required minlength="3" maxlength="50">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input th:field="*{email}" id="email" name="email" placeholder="email" type="text"
+                           class="form-control" required minlength="8" maxlength="50">
+                </div>
+
+                <div>
+                    <input type="hidden" th:field="*{id}">
+                </div>
+
+                <div class="form-group">
+                    <button name="submit" type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

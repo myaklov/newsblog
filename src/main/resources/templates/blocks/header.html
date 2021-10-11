@@ -1,0 +1,16 @@
+<div xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:fragment="header">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <nav class="my-2 my-md-0 mr-md-3">
+            <a class="p-2 text-dark" href="/">Главная</a>
+        </nav>
+        <div sec:authorize="!isFullyAuthenticated()">
+            <a href="/login" class="p-2 text-dark">Войти</a>
+            <a href="/reg" class="p-2 text-dark">Регистрация</a>
+        </div>
+        <div sec:authorize="isFullyAuthenticated()">
+            <a sec:authorize="hasRole('ADMIN')" class="p-2 text-dark" href="/admin/article/new">Добавить статью</a>
+            <a sec:authorize="hasRole('ADMIN')" class="p-2 text-dark" href="/users/">Пользователи</a>
+            <a class="p-2 text-dark" th:href="@{/logout}">Выход</a>
+        </div>
+    </div>
+</div>

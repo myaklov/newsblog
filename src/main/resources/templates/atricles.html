@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://bootstrap-4.ru/dist/css/bootstrap.min.css">
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="header-menu">
+            <header th:insert="blocks/header :: header"></header>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="content-article col-12">
+            <div th:each="article:${listArticles}">
+                <div class="block-article">
+                    <a th:href="@{/articles/}+${article.getId()}"><h4 class="mt-2" th:text="${article.getTitle()}"></h4></a>
+                    <p th:text="${article.getDescription()}"></p>
+                    <div class="d-flex justify-content-end"> <a th:href="@{/articles/}+${article.getId()}">Читать далее..</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="pagination-block">
+            <ul class="pagination">
+                <div th:each="number : ${pageNumbers}">
+                    <li class="page-item"> <a class="page-link" th:href="@{/articles/?page=}+${number}" th:text="${number}"></a></li>
+                </div>
+            </ul>
+        </div>
+    </div>
+    <div class="rov">
+        <div class="footer"></div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

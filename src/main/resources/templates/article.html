@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${article.getTitle()}">Title</title>
+    <link rel="stylesheet" href="https://bootstrap-4.ru/dist/css/bootstrap.min.css">
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="header-menu">
+            <header th:insert="blocks/header :: header"></header>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="content-article col-12">
+            <div class="block-article">
+                <h3 th:text="${article.getTitle()}"></h3>
+                <p th:text="${article.getText()}"></p>
+
+                <div sec:authorize="isFullyAuthenticated()">
+                    <div sec:authorize="hasRole('ADMIN')">
+                        <p><a th:href="@{/admin/article/}+${article.getId}+@{/edit}">Редактировать</a> <a
+                                th:href="@{/admin/article/}+${article.getId}+@{/delete}">Удалить</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

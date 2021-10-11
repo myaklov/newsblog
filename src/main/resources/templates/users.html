@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Зарегистрированные пользователи</title>
+    <link rel="stylesheet" href="https://bootstrap-4.ru/dist/css/bootstrap.min.css">
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="header-menu">
+            <header th:insert="blocks/header :: header"></header>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="content-article">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                <th>Login</th>
+                <th>Email</th>
+                <th>Edit</th>
+                <th>Delete</th>
+                </thead>
+                <tbody class="thead-light">
+
+
+            <div th:each="user: ${listusers}">
+                <tr>
+                    <td th:text="${user.getUsername()}"></td>
+                    <td th:text="${user.getEmail()}"></td>
+                    <td><a th:href="@{/users/}+${user.getId()}+@{/edit}">edit</a> </td>
+                    <td><a th:href="@{/users/}+${user.getId()}+@{/delete}">delete</a> </td>
+
+            </div>
+            </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="pagination-block">
+            <ul class="pagination">
+                <div th:each="number : ${pageNumbers}">
+                    <li class="page-item"> <a class="page-link" th:href="@{/articles/?page=}+${number}" th:text="${number}"></a></li>
+                </div>
+            </ul>
+        </div>
+    </div>
+    <div class="rov">
+        <div class="footer"></div>
+    </div>
+</div>
+
+
+
+</body>
+</html>
