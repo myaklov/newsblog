@@ -62,5 +62,27 @@ public class UserController {
         return "redirect:/users/";
 
     }
+
+    @GetMapping("/{id}/delete")
+    public String showDeleteUser(Model model, @PathVariable("id") Long id) {
+        User user = userService.findById(id);
+        if(user != null && !user.getUsername().equals("admin")){
+            model.addAttribute("id", id);
+            model.addAttribute("user",user);
+            return "delete_user";
+        }
+        return "redirect:/users/";
+
+    }
+
+    @PostMapping("/{id}/delete")
+    public String deleteUser(@RequestParam("id") Long id) {
+       User user = userService.findById(id);
+       if(user != null){
+           userService.deleteUser(id);
+       }
+        return "redirect:/users/";
+
+    }
 }
 

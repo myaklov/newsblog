@@ -45,7 +45,7 @@
         <div class="pagination-block">
             <ul class="pagination">
                 <div th:each="number : ${pageNumbers}">
-                    <li class="page-item"> <a class="page-link" th:href="@{/articles/?page=}+${number}" th:text="${number}"></a></li>
+                    <li class="page-item"> <a class="page-link" th:href="@{/users/?page=}+${number}" th:text="${number}"></a></li>
                 </div>
             </ul>
         </div>

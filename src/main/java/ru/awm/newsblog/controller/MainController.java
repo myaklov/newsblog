@@ -5,9 +5,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ru.awm.newsblog.model.Article;
 import ru.awm.newsblog.service.ArticleService;
 import ru.awm.newsblog.service.UserService;
-import ru.awm.newsblog.model.Role;
 import ru.awm.newsblog.model.User;
 
 import java.security.Principal;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -43,7 +38,7 @@ public class MainController {
     }
 
     @GetMapping(path = {"/", "/articles"})
-    public String showMainArticles(Authentication authentication, Model model, @PageableDefault(sort = {"id"},
+    public String showMainArticles(Model model, @PageableDefault(sort = {"id"},
             direction = Sort.Direction.DESC, size = 5) Pageable pageable) {
         Page<Article> listArticles = articleService.getArticlesPage(pageable);
         int totalpages = listArticles.getTotalPages();
@@ -54,23 +49,6 @@ public class MainController {
             model.addAttribute("pageNumbers", pageNumbers);
 
         }
-//-----------------
-        if (authentication != null) {
-            List<String> m = authentication.getAuthorities().stream().map(r -> r.toString()).collect(Collectors.toList());
-
-            for (String s : m) {
-                System.out.println(s);
-            }
-
-
-        }
-
-        List<User> users = userService.findByUsernameNot("admin");
-        for (User user : users) {
-            System.out.println(user.getUsername());
-        }
-
-        //-------------------------------------
 
         model.addAttribute("listArticles", listArticles);
         return "atricles";

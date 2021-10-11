@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import ru.awm.newsblog.model.Role;
 import ru.awm.newsblog.model.User;
 import ru.awm.newsblog.repo.UserRepository;
+
 import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.Collections;
@@ -97,6 +98,10 @@ public class UserService implements UserDetailsService {
         }
         return false;
 
+    }
+
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
     }
 
 
